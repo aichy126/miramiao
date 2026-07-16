@@ -1,0 +1,46 @@
+/* 极简排版,跟随系统深浅色。无构建步骤、无外部依赖。 */
+:root {
+  --bg: #ffffff;
+  --fg: #1c1c22;
+  --muted: #6a6a78;
+  --line: #e6e6ec;
+  --accent: #4c6ef5;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f0f14;
+    --fg: #e8e8f0;
+    --muted: #9a9aae;
+    --line: #26262f;
+    --accent: #8ca4ff;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+main { max-width: 680px; margin: 0 auto; padding: 48px 22px 72px; }
+
+h1 { font-size: 28px; line-height: 1.25; margin: 0 0 6px; letter-spacing: -0.02em; }
+h2 { font-size: 19px; margin: 34px 0 8px; letter-spacing: -0.01em; }
+h3 { font-size: 16px; margin: 22px 0 4px; }
+p { margin: 0 0 12px; }
+
+a { color: var(--accent); }
+a:hover { text-decoration: none; }
+
+.meta { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+.back { font-size: 14px; margin-bottom: 26px; }
+.back a { color: var(--muted); text-decoration: none; }
+.back a:hover { color: var(--accent); }
+
+.app { border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; margin-top: 26px; }
+.app h2 { margin-top: 0; }
+.links { display: flex; gap: 18px; margin: 14px 0 0; font-size: 15px; }
+
+.foot { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
