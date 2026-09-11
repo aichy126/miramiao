@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support — Knockbox</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main>
+  <p class="back"><a href="support-zh.html">中文</a></p>
+
+  <h1>Knockbox — Support</h1>
+
+  <h2>Contact</h2>
+  <p>Email <a href="mailto:info@miramiao.com">info@miramiao.com</a>. One person reads it, usually within a day or two.</p>
+
+  <h2>Frequently asked</h2>
+
+  <h3>What is this for?</h3>
+  <p>Sending yourself a notification from anything that can make an HTTP request — a script, a CI job,
+  a monitor, or an AI agent. One <code>curl</code> and your phone buzzes.</p>
+
+  <h3>Do I need a server?</h3>
+  <p>You can scan the QR code on a public instance and start using it immediately, or run the
+  open-source server yourself on any machine. Self-hosting means the messages never leave your hardware.</p>
+
+  <h3>I'm not getting notifications</h3>
+  <ol>
+    <li>Check notification permission for Knockbox in iOS Settings.</li>
+    <li>Open the channel and check whether you muted it — a muted channel is archived but never pushed.</li>
+    <li>If the message appears in the app but never buzzed, the channel's interruption level may be set
+      to Quiet, or your Focus mode is filtering it. Time Sensitive breaks through Focus.</li>
+  </ol>
+
+  <h3>Notifications arrive but without the full text or image</h3>
+  <p>The notification carries a summary; the full body is fetched from your server as the notification
+  lands. If your server is only reachable on your home network, that fetch fails while you are away —
+  the notification still arrives, just without the extras, and everything syncs when you get home.</p>
+
+  <h3>Can I use several devices?</h3>
+  <p>Yes. From a device that is already connected, generate a pairing code and scan it with the new one.
+  Both then receive the same messages and share read state.</p>
+
+  <h3>I lost all my devices</h3>
+  <p>If you used a public instance, there is no account and no password, so there is no way to recover
+  that identity — this is stated when you join. If you self-host, your data is on your own server and a
+  new device can simply pair again.</p>
+
+  <h3>How do I delete my data?</h3>
+  <p>Delete a message by long-pressing it, or clear a whole channel from its settings. Both are physical
+  deletions on the device and on the server. Deleting the app removes everything local.</p>
+
+  <p class="nav"><a href="privacy.html">Privacy Policy</a></p>
+</main>
+</body>
+</html>
