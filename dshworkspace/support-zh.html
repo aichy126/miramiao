@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>支持 — DSH 工作台</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main>
+  <p class="back"><a href="support.html">English</a> · <a href="privacy-zh.html">隐私政策</a></p>
+  <h1>DSH 工作台 — 支持</h1>
+  <p class="meta">最后更新：2026-09-29</p>
+  <p>DSH 工作台是 DeepSeek Harness（DSH）服务端的 iPhone / iPad 客户端，连的是你自己跑的服务端，或别人为你跑的那个。应用本身不带服务端：要用它，你得有一个可连的地址。</p>
+
+  <h2>你需要准备</h2>
+  <ul>
+    <li>一个能访问到的 DSH 网页工作台地址（<code>https://</code>，或你自己局域网内的 <code>http://</code>）。</li>
+    <li><code>dsh web</code> 启动时打印的登录链接（里面带 token）。把整条链接粘进应用的连接页；token 只用于登录，不会作为地址的一部分被保存。</li>
+  </ul>
+
+  <h2>连接步骤</h2>
+  <ol>
+    <li>在连接页粘贴登录链接并继续，应用会打开该工作台自己的登录页完成会话建立。</li>
+    <li>登录后，应用从那个服务端读取你的会话并以原生界面展示；网页工作台随时可从设置里打开。</li>
+  </ol>
+
+  <h2>遇到问题时</h2>
+  <ul>
+    <li><strong>提示「连不上 DSH」</strong> —— 检查地址和服务端是否在运行。走公网必须是 HTTPS；明文 HTTP 只允许在局域网内使用。</li>
+    <li><strong>登录了但没有会话</strong> —— 那个账号下还没有内容，或者会话已过期：从设置里打开一次网页工作台重新登录。</li>
+    <li><strong>浏览文件夹是空的或不被允许</strong> —— 远程列目录来自 DSH 的网页 profile：在服务端启用 <code>dsh-host-directory-picker-browse</code> 与 <code>dsh-client-ui-directory-picker-browse</code> 两个插件。</li>
+    <li><strong>语音输入没反应</strong> —— 需要「麦克风」和「语音识别」权限（iOS 设置 › 隐私与安全性）。键盘弹着的话先收起来。</li>
+    <li><strong>回复或日志看着被截断</strong> —— 从对话右上角「…」进执行细节看完整内容。</li>
+  </ul>
+
+  <h2>本应用不做什么</h2>
+  <p>它不提供服务器、不创建账号，除了你配置的那个服务端之外不往任何地方发送数据。详见<a href="privacy-zh.html">隐私政策</a>。</p>
+
+  <h2>联系</h2>
+  <p>这里没覆盖到的问题，写信到 <a href="mailto:info@miramiao.com">info@miramiao.com</a>。请附上应用版本（设置 › 关于）；如果是连接问题，说明你用的服务端地址（<strong>不要</strong>把 token 发出来）。</p>
+</main>
+</body>
+</html>

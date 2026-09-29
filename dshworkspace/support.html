@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support — DSH Workspace</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main>
+  <p class="back"><a href="support-zh.html">中文</a> · <a href="privacy.html">Privacy</a></p>
+  <h1>DSH Workspace — Support</h1>
+  <p class="meta">Last updated: 2026-09-29</p>
+  <p>DSH Workspace is an iPhone and iPad client for a DeepSeek Harness (DSH) server that you run or that someone runs for you. The App ships without a server: to use it you need an address to connect to.</p>
+
+  <h2>What you need</h2>
+  <ul>
+    <li>A reachable DSH web workspace (an <code>https://</code> address, or a <code>http://</code> address on your own network).</li>
+    <li>The sign-in link that <code>dsh web</code> prints, which contains the token. Paste the whole link into the App's setup screen; the token is used to sign in and is not saved as part of the address.</li>
+  </ul>
+
+  <h2>Connecting</h2>
+  <ol>
+    <li>On the setup screen, paste the sign-in link and continue. The App opens the workspace's own sign-in page to establish the session.</li>
+    <li>Once signed in, the App reads your sessions from that server and shows them natively. The web workspace stays available from Settings.</li>
+  </ol>
+
+  <h2>If something does not work</h2>
+  <ul>
+    <li><strong>“Could not reach DSH.”</strong> — check the address and that the server is running. Over the internet the address must be HTTPS; plain HTTP is only allowed on a local network.</li>
+    <li><strong>Signed in, but no sessions.</strong> — the account has nothing yet, or the session expired: open the web workspace once from Settings and sign in again.</li>
+    <li><strong>Browsing folders is empty or refused.</strong> — remote folder browsing comes from the DSH web profile: enable the <code>dsh-host-directory-picker-browse</code> and <code>dsh-client-ui-directory-picker-browse</code> plugins on the server.</li>
+    <li><strong>Voice input does nothing.</strong> — the App needs Microphone and Speech Recognition permission (iOS Settings › Privacy &amp; Security). If the keyboard is up, dismiss it first.</li>
+    <li><strong>A long answer or log looks cut off.</strong> — open the execution details from the “…” menu in the conversation.</li>
+  </ul>
+
+  <h2>What the App does not do</h2>
+  <p>It does not host a server, does not create accounts, and does not send anything anywhere except the server you configured. See the <a href="privacy.html">Privacy Policy</a>.</p>
+
+  <h2>Contact</h2>
+  <p>Anything not covered here — write to <a href="mailto:info@miramiao.com">info@miramiao.com</a>. Please mention the App version (Settings › About) and, if it is a connection problem, which server address you used (never send your token).</p>
+</main>
+</body>
+</html>
