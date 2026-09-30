@@ -10,35 +10,41 @@
 <main>
   <p class="back"><a href="support.html">English</a> · <a href="privacy-zh.html">隐私政策</a></p>
   <h1>DSH 工作台 — 支持</h1>
-  <p class="meta">最后更新：2026-09-29</p>
-  <p>DSH 工作台是 DeepSeek Harness（DSH）服务端的 iPhone / iPad 客户端，连的是你自己跑的服务端，或别人为你跑的那个。应用本身不带服务端：要用它，你得有一个可连的地址。</p>
+  <p class="meta">最后更新：2026-10-01</p>
+  <p>DSH 工作台是 DeepSeek Harness 的 iPhone 和 iPad 客户端。你需要在自己的电脑上运行 DeepSeek Harness，再让 App 连接到它。</p>
 
-  <h2>你需要准备</h2>
-  <ul>
-    <li>一个能访问到的 DSH 网页工作台地址（<code>https://</code>，或你自己局域网内的 <code>http://</code>）。</li>
-    <li><code>dsh web</code> 启动时打印的登录链接（里面带 token）。把整条链接粘进应用的连接页；token 只用于登录，不会作为地址的一部分被保存。</li>
-  </ul>
-
-  <h2>连接步骤</h2>
+  <h2>连接电脑</h2>
   <ol>
-    <li>在连接页粘贴登录链接并继续，应用会打开该工作台自己的登录页完成会话建立。</li>
-    <li>登录后，应用从那个服务端读取你的会话并以原生界面展示；网页工作台随时可从设置里打开。</li>
+    <li>在电脑上安装 DeepSeek Harness 0.2.0 或更新版本，运行 <code>dsh web</code>。</li>
+    <li>安装局域网网关插件：<code>dsh plugin --profile web add @riceawa/dsh-lan-gateway</code>。</li>
+    <li>在电脑的 DeepSeek Harness 对话中依次执行 <code>lan_gateway set-password</code> 和 <code>lan_gateway enable</code>。密码至少 8 位；<code>lan_gateway status</code> 可查看网关状态和端口。</li>
+    <li>在 App 中填写电脑的局域网地址和网关端口（通常是 <code>3081</code>），例如 <code>http://192.168.1.20:3081</code>，再输入刚设置的网关密码。</li>
   </ol>
+  <p>手机和电脑需要在同一个局域网。请填写电脑的地址，而不是 <code>127.0.0.1</code>，也不要填写 <code>dsh web</code> 使用的本机端口。跨网络访问需要自行配置可访问的地址和 HTTPS。</p>
+  <p>网关默认拒绝明文 HTTP。如果你只在可信的局域网内使用 HTTP，需要在 <code>~/.dsh/profiles/web/cordis.patch.yml</code> 中已有的 <code>dsh-lan-gateway</code> 配置下设置 <code>allowInsecurePlaintext: true</code>。HTTP 上的密码和 cookie 可被同一网络中的设备看到；跨网络使用 HTTPS。</p>
 
-  <h2>遇到问题时</h2>
+  <h2>让 App 浏览电脑上的文件夹</h2>
+  <p>DeepSeek Harness 的自动目录选择器在本机可能打开电脑的系统窗口，手机无法操作。DeepSeek Harness 已包含页面内目录浏览插件；在电脑的 <code>~/.dsh/profiles/web/cordis.patch.yml</code> 末尾加入以下配置，切换目录选择方式：</p>
+  <pre><code>- id: directory-picker
+  disabled: true
+- insert:
+    - id: directory-picker-browse
+      name: '@deepseek-ai/dsh-host-directory-picker-browse'
+    - id: ui-directory-picker-browse
+      name: '@deepseek-ai/dsh-client-ui-directory-picker-browse'</code></pre>
+  <p>保存后重新打开 App 的新建对话页；已打开的 DeepSeek Harness 网页也请刷新。网页端的「添加工作区」此时同样会在页面内列出电脑上的文件夹。</p>
+
+  <h2>遇到问题</h2>
   <ul>
-    <li><strong>提示「连不上 DSH」</strong> —— 检查地址和服务端是否在运行。走公网必须是 HTTPS；明文 HTTP 只允许在局域网内使用。</li>
-    <li><strong>登录了但没有会话</strong> —— 那个账号下还没有内容，或者会话已过期：从设置里打开一次网页工作台重新登录。</li>
-    <li><strong>浏览文件夹是空的或不被允许</strong> —— 远程列目录来自 DSH 的网页 profile：在服务端启用 <code>dsh-host-directory-picker-browse</code> 与 <code>dsh-client-ui-directory-picker-browse</code> 两个插件。</li>
-    <li><strong>语音输入没反应</strong> —— 需要「麦克风」和「语音识别」权限（iOS 设置 › 隐私与安全性）。键盘弹着的话先收起来。</li>
-    <li><strong>回复或日志看着被截断</strong> —— 从对话右上角「…」进执行细节看完整内容。</li>
+    <li><strong>连不上服务器：</strong>确认电脑没有休眠、网关已启用，并检查地址和端口。<code>127.0.0.1</code> 在手机上指手机自身。</li>
+    <li><strong>密码错误：</strong>输入 <code>lan_gateway set-password</code> 设置的网关密码。</li>
+    <li><strong>已连接但会话列表为空：</strong>检查电脑上的 DeepSeek Harness 是否为 0.2.0 或更新版本。</li>
+    <li><strong>新建对话无法加载文件夹：</strong>检查上面的配置是否写入 <code>web</code> profile；在电脑的网页工作台点击「添加工作区」验证是否出现页面内目录列表。</li>
+    <li><strong>语音输入无法使用：</strong>在 iOS 设置中检查本应用的麦克风和语音识别权限。</li>
   </ul>
-
-  <h2>本应用不做什么</h2>
-  <p>它不提供服务器、不创建账号，除了你配置的那个服务端之外不往任何地方发送数据。详见<a href="privacy-zh.html">隐私政策</a>。</p>
 
   <h2>联系</h2>
-  <p>这里没覆盖到的问题，写信到 <a href="mailto:info@miramiao.com">info@miramiao.com</a>。请附上应用版本（设置 › 关于）；如果是连接问题，说明你用的服务端地址（<strong>不要</strong>把 token 发出来）。</p>
+  <p>仍有问题请写信至 <a href="mailto:info@miramiao.com">info@miramiao.com</a>，附上应用版本和遇到的现象。请勿发送网关密码或登录 cookie。数据处理方式见<a href="privacy-zh.html">隐私政策</a>。</p>
 </main>
 </body>
 </html>

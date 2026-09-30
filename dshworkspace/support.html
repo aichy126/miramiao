@@ -10,35 +10,41 @@
 <main>
   <p class="back"><a href="support-zh.html">中文</a> · <a href="privacy.html">Privacy</a></p>
   <h1>DSH Workspace — Support</h1>
-  <p class="meta">Last updated: 2026-09-29</p>
-  <p>DSH Workspace is an iPhone and iPad client for a DeepSeek Harness (DSH) server that you run or that someone runs for you. The App ships without a server: to use it you need an address to connect to.</p>
+  <p class="meta">Last updated: 2026-10-01</p>
+  <p>DSH Workspace is an iPhone and iPad client for DeepSeek Harness. Run DeepSeek Harness on your computer, then connect the App to it.</p>
 
-  <h2>What you need</h2>
-  <ul>
-    <li>A reachable DSH web workspace (an <code>https://</code> address, or a <code>http://</code> address on your own network).</li>
-    <li>The sign-in link that <code>dsh web</code> prints, which contains the token. Paste the whole link into the App's setup screen; the token is used to sign in and is not saved as part of the address.</li>
-  </ul>
-
-  <h2>Connecting</h2>
+  <h2>Connect your computer</h2>
   <ol>
-    <li>On the setup screen, paste the sign-in link and continue. The App opens the workspace's own sign-in page to establish the session.</li>
-    <li>Once signed in, the App reads your sessions from that server and shows them natively. The web workspace stays available from Settings.</li>
+    <li>Install DeepSeek Harness 0.2.0 or newer on your computer and run <code>dsh web</code>.</li>
+    <li>Install the LAN gateway plugin: <code>dsh plugin --profile web add @riceawa/dsh-lan-gateway</code>.</li>
+    <li>In a DeepSeek Harness conversation on that computer, run <code>lan_gateway set-password</code> and then <code>lan_gateway enable</code>. Use a password of at least 8 characters. <code>lan_gateway status</code> shows the gateway status and port.</li>
+    <li>In the App, enter the computer's local network address and gateway port (usually <code>3081</code>), such as <code>http://192.168.1.20:3081</code>, followed by the gateway password you set.</li>
   </ol>
+  <p>Your phone and computer need to be on the same local network. Use the computer's address, not <code>127.0.0.1</code> or the local port used by <code>dsh web</code>. Access from another network requires your own reachable address and HTTPS setup.</p>
+  <p>The gateway rejects plain HTTP by default. If you use HTTP on a trusted local network, set <code>allowInsecurePlaintext: true</code> under the existing <code>dsh-lan-gateway</code> configuration in <code>~/.dsh/profiles/web/cordis.patch.yml</code>. Other devices on that network may see passwords and cookies sent over HTTP. Use HTTPS across networks.</p>
 
-  <h2>If something does not work</h2>
+  <h2>Browse the computer's folders in the App</h2>
+  <p>DeepSeek Harness may open a native computer dialog when choosing a folder locally. A phone cannot operate that dialog. DeepSeek Harness already includes plugins for browsing folders inside the page. Add this configuration to the end of <code>~/.dsh/profiles/web/cordis.patch.yml</code> on the computer:</p>
+  <pre><code>- id: directory-picker
+  disabled: true
+- insert:
+    - id: directory-picker-browse
+      name: '@deepseek-ai/dsh-host-directory-picker-browse'
+    - id: ui-directory-picker-browse
+      name: '@deepseek-ai/dsh-client-ui-directory-picker-browse'</code></pre>
+  <p>Save the file, then reopen the App's new chat screen. Refresh any open DeepSeek Harness web page. “Add workspace” on the web will now list the computer's folders inside the page too.</p>
+
+  <h2>Troubleshooting</h2>
   <ul>
-    <li><strong>“Could not reach DSH.”</strong> — check the address and that the server is running. Over the internet the address must be HTTPS; plain HTTP is only allowed on a local network.</li>
-    <li><strong>Signed in, but no sessions.</strong> — the account has nothing yet, or the session expired: open the web workspace once from Settings and sign in again.</li>
-    <li><strong>Browsing folders is empty or refused.</strong> — remote folder browsing comes from the DSH web profile: enable the <code>dsh-host-directory-picker-browse</code> and <code>dsh-client-ui-directory-picker-browse</code> plugins on the server.</li>
-    <li><strong>Voice input does nothing.</strong> — the App needs Microphone and Speech Recognition permission (iOS Settings › Privacy &amp; Security). If the keyboard is up, dismiss it first.</li>
-    <li><strong>A long answer or log looks cut off.</strong> — open the execution details from the “…” menu in the conversation.</li>
+    <li><strong>Cannot reach the server:</strong> check that the computer is awake, the gateway is enabled, and the address and port are correct. On a phone, <code>127.0.0.1</code> refers to the phone itself.</li>
+    <li><strong>Wrong password:</strong> enter the gateway password set with <code>lan_gateway set-password</code>.</li>
+    <li><strong>Connected, but no sessions appear:</strong> check that DeepSeek Harness on the computer is version 0.2.0 or newer.</li>
+    <li><strong>Cannot load folders for a new chat:</strong> check that the configuration above is in the <code>web</code> profile. On the computer, click “Add workspace” in the web workspace to check that folders appear inside the page.</li>
+    <li><strong>Voice input does not work:</strong> check the App's Microphone and Speech Recognition permissions in iOS Settings.</li>
   </ul>
-
-  <h2>What the App does not do</h2>
-  <p>It does not host a server, does not create accounts, and does not send anything anywhere except the server you configured. See the <a href="privacy.html">Privacy Policy</a>.</p>
 
   <h2>Contact</h2>
-  <p>Anything not covered here — write to <a href="mailto:info@miramiao.com">info@miramiao.com</a>. Please mention the App version (Settings › About) and, if it is a connection problem, which server address you used (never send your token).</p>
+  <p>If you still need help, email <a href="mailto:info@miramiao.com">info@miramiao.com</a> with the App version and what happened. Do not send your gateway password or login cookie. See the <a href="privacy.html">Privacy Policy</a> for how data is handled.</p>
 </main>
 </body>
 </html>
