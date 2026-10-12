@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support — aiterm</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main>
+  <p class="back"><a href="support-zh.html">中文</a> · <a href="privacy.html">Privacy</a></p>
+  <h1>aiterm — Support</h1>
+  <p class="meta">Last updated: 2026-10-12</p>
+  <p>aiterm is an iPhone and iPad client for an aiterm server running on your computer. It gives you that computer's terminal sessions, files and coding-agent conversation history. Sessions keep running on the computer when you disconnect.</p>
+
+  <h2>Connect to your computer</h2>
+  <ul>
+    <li><strong>Scan to connect:</strong> on the computer, open aiterm in a browser, go to Settings › 在手机上连接 (Connect on phone), and scan the code with the App (or the Camera app). The code works once and expires after two minutes.</li>
+    <li><strong>Enter the address:</strong> type the server address, such as <code>192.168.1.20:9846</code> on your local network or <code>https://shell.example.com</code> from outside, then the server password.</li>
+  </ul>
+  <p>Plain <code>http</code> is accepted only for local network addresses. Use <code>https</code> for anything reachable from the internet.</p>
+
+  <h2>HTTPS with your own certificate</h2>
+  <ul>
+    <li><strong>Self-signed certificate:</strong> the App shows the certificate's fingerprint. Compare it with the one shown on the computer, then trust it. From then on the App accepts only that certificate for this address and warns you if it changes.</li>
+    <li><strong>Client certificate (mutual TLS):</strong> if your server asks for one, import the <code>.p12</code> file and its password on the sign-in screen, then sign in again.</li>
+  </ul>
+
+  <h2>Troubleshooting</h2>
+  <ul>
+    <li><strong>No response:</strong> check that the aiterm service is running, the address and port are right, and the device is on the same network for a local address.</li>
+    <li><strong>Local addresses can't be reached at all:</strong> allow aiterm in Settings › Privacy &amp; Security › Local Network.</li>
+    <li><strong>Wrong password:</strong> run <code>aiterm passwd</code> in a terminal on the computer to set a new one. Every signed-in device will need to sign in again; running sessions are not affected.</li>
+    <li><strong>Too many failed attempts:</strong> wait for the time shown, then try again.</li>
+    <li><strong>The certificate has changed:</strong> if you did not change it, do not continue. If you did, check the new fingerprint against the computer before trusting it.</li>
+  </ul>
+
+  <h2>Contact</h2>
+  <p>If you still need help, email <a href="mailto:info@miramiao.com">info@miramiao.com</a> with the App version and what happened. Do not send your password or certificate. See the <a href="privacy.html">Privacy Policy</a> for how data is handled.</p>
+</main>
+</body>
+</html>
